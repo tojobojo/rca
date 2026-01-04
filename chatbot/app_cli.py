@@ -45,6 +45,12 @@ install_packages()
 # Imports
 # ---------------------------------------------------------------------
 
+import os
+
+# fixing asyncio logs from litellm
+os.environ["LITELLM_LOGGING"] = "False"
+os.environ["LITELLM_DISABLE_LOGGING"] = "True"
+
 from agents import Runner, SQLiteSession
 from agents.exceptions import (
     InputGuardrailTripwireTriggered,

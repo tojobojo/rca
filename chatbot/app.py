@@ -1,16 +1,22 @@
 # app.py - Streamlit Application for Pipeline RCA Analysis
+
+import os
+
+# fixing asyncio logs from litellm
+os.environ["LITELLM_LOGGING"] = "False"
+os.environ["LITELLM_DISABLE_LOGGING"] = "True"
+
 import streamlit as st
 import asyncio
 from datetime import datetime
 from pathlib import Path
-
-from agents import Runner, SQLiteSession
-from agents.exceptions import InputGuardrailTripwireTriggered, OutputGuardrailTripwireTriggered
-
 from config import Config
 from agent_manager import create_rca_agent, detect_pipeline_selection
 from utils.logging_config import setup_logging
 from utils.rate_limiter import RateLimiter
+
+from agents import Runner, SQLiteSession
+from agents.exceptions import InputGuardrailTripwireTriggered, OutputGuardrailTripwireTriggered
 
 # Initialize logging
 logger = setup_logging()
@@ -30,7 +36,7 @@ except ValueError as e:
 def get_top_active_pipelines(limit: int = 5):
     """Get top N most active pipelines from the database."""
     try:
-        from agent_manager import get_spark_session
+        from utils.spark_session import get_spark_session
         
         spark = get_spark_session()
         if not spark:
@@ -42,10 +48,8 @@ def get_top_active_pipelines(limit: int = 5):
             pipeline_name,
             COUNT(DISTINCT run_id) as run_count,
             MAX(run_timestamp) as last_run
-        FROM pipeline_run_metrics
-        WHERE DATE(run_timestamp) >= DATE_SUB(CURRENT_DATE(), 7)
+        FROM {Config.METRICS_TABLE}
         GROUP BY pipeline_name
-        ORDER BY COUNT(DISTINCT run_id) DESC
         LIMIT {limit}
         """
         
@@ -411,7 +415,7 @@ if prompt := st.chat_input("Ask me about your pipeline metrics..."):
                     return f"I encountered an error: {str(e)}\n\nPlease try again or ask a different question."
             
             # Show loading indicator
-            with st.spinner("Analyzing pipeline data..."):
+            with st.spinner("..."):
                 response = asyncio.run(run_agent())
             
             # Display response

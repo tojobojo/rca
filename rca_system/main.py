@@ -251,7 +251,7 @@ def main():
     
     logger.info("Pipeline RCA System initialized and ready")
 
-    run_id = "run_027"
+    run_id = "run_024"
     pipeline_name = "merchant_peer_grouping_pipeline"
 
     orchestrator = PipelineRCAOrchestrator()
