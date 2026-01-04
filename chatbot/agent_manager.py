@@ -8,22 +8,9 @@ import re
 from datetime import datetime, timedelta
 import json
 
+from utils.spark_session import get_spark_session
+
 logger = logging.getLogger("rca_bot.agents")
-
-# ============================================================================
-# DATABRICKS CONNECTION HELPER
-# ============================================================================
-
-def get_spark_session():
-    """Get or create Spark session for Databricks"""
-    try:
-        from pyspark.sql import SparkSession
-        spark = SparkSession.builder.getOrCreate()
-        return spark
-    except Exception as e:
-        logger.error(f"Failed to get Spark session: {e}")
-        return None
-
 
 # ============================================================================
 # FUNCTION TOOLS - Pipeline RCA Analysis Tools
@@ -64,7 +51,7 @@ def query_pipeline_metrics(
         query += "input_records, output_records, dropped_records, drop_percentage, "
         query += "rule_version_id, is_first_run_after_change, days_since_rule_changed, "
         query += "drop_percentage_7day_avg, drop_percentage_30day_avg "
-        query += "FROM pipeline_run_metrics WHERE 1=1"
+        query += f"FROM {Config.METRICS_TABLE} WHERE 1=1"
         
         if pipeline_name:
             query += f" AND pipeline_name = '{pipeline_name}'"
@@ -159,7 +146,7 @@ def compare_pipeline_runs(run_id_1: str, run_id_2: str) -> str:
             dropped_records,
             drop_percentage,
             run_timestamp
-        FROM pipeline_run_metrics
+        FROM {Config.METRICS_TABLE}
         WHERE run_id IN ('{run_id_1}', '{run_id_2}')
         ORDER BY run_id, step_name, rule_name
         """
@@ -278,7 +265,7 @@ def get_rule_change_history(
             diff_summary,
             commit_hash,
             author
-        FROM pipeline_rule_changes
+        FROM {Config.RULE_CHANGES_TABLE}
         WHERE DATE(change_timestamp) >= '{cutoff_date}'
         """
         
@@ -360,7 +347,7 @@ def get_rule_definition(rule_name: str, pipeline_name: str = None, version: str 
                 valid_to,
                 change_type,
                 commit_hash
-            FROM pipeline_rule_definitions
+            FROM {Config.RULE_DEFINITIONS_TABLE}
             WHERE rule_name = '{rule_name}'
               AND is_current = true
             """
@@ -381,7 +368,7 @@ def get_rule_definition(rule_name: str, pipeline_name: str = None, version: str 
                 valid_to,
                 change_type,
                 commit_hash
-            FROM pipeline_rule_definitions
+            FROM {Config.RULE_DEFINITIONS_TABLE}
             WHERE rule_version_id = '{version}'
             """
         
@@ -454,7 +441,7 @@ def analyze_drop_trends(
             COUNT(*) as run_count,
             SUM(dropped_records) as total_dropped,
             MAX(is_first_run_after_change) as had_code_change
-        FROM pipeline_run_metrics
+        FROM {Config.METRICS_TABLE}
         WHERE pipeline_name = '{pipeline_name}'
           AND DATE(run_timestamp) >= '{cutoff_date}'
         """
@@ -553,8 +540,8 @@ def correlate_code_changes_with_drops(
             c.diff_summary,
             c.commit_hash,
             c.author
-        FROM pipeline_run_metrics m
-        LEFT JOIN pipeline_rule_changes c ON m.recent_change_id = c.change_id
+        FROM {Config.METRICS_TABLE} m
+        LEFT JOIN {Config.RULE_CHANGES_TABLE} c ON m.recent_change_id = c.change_id
         WHERE m.pipeline_name = '{pipeline_name}'
           AND DATE(m.run_timestamp) >= '{cutoff_date}'
           AND m.is_first_run_after_change = true
@@ -634,17 +621,18 @@ def list_available_pipelines() -> str:
         return json.dumps({"error": "Unable to connect to Spark session"})
     
     try:
-        query = """
+        query = f"""
         SELECT 
             pipeline_name,
             COUNT(DISTINCT run_id) as total_runs,
             MAX(run_timestamp) as last_run,
             COUNT(DISTINCT step_name) as step_count,
             COUNT(DISTINCT rule_name) as rule_count
-        FROM pipeline_run_metrics
+        FROM {Config.METRICS_TABLE}
         GROUP BY pipeline_name
         ORDER BY MAX(run_timestamp) DESC
         """
+        print("query ", query)
         
         df = spark.sql(query)
         results = df.collect()
@@ -698,7 +686,7 @@ def get_pipeline_steps(pipeline_name: str) -> str:
             COUNT(DISTINCT run_id) as run_count,
             MAX(run_timestamp) as last_run,
             AVG(drop_percentage) as avg_drop_pct
-        FROM pipeline_run_metrics
+        FROM {Config.METRICS_TABLE}
         WHERE pipeline_name = '{pipeline_name}'
         GROUP BY step_name
         ORDER BY MAX(run_timestamp) DESC
@@ -756,7 +744,7 @@ def fuzzy_search_pipelines(user_input: str, threshold: float = 0.6) -> str:
     
     try:
         # Get all available pipeline names
-        query = "SELECT DISTINCT pipeline_name FROM pipeline_run_metrics ORDER BY pipeline_name"
+        query = f"SELECT DISTINCT pipeline_name FROM {Config.METRICS_TABLE} ORDER BY pipeline_name"
         df = spark.sql(query)
         results = df.collect()
         
