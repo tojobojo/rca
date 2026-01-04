@@ -1,0 +1,135 @@
+2025-12-29 11:53:51 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 11:53:51 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 11:53:51 - rca_bot - INFO - setup_logging:56 - Log Level: INFO
+2025-12-29 11:53:51 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 11:53:51 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 11:53:51 - rca_bot - ERROR - <module>:462 - Fatal error: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+  File "/home/spark-5af649ef-e41e-4d54-8a2f-54/.ipykernel/8416/command-6663728338687264-2770654381", line 456, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 186, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2025-12-29 19:32:34 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:32:34 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:32:34 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:32:34 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:32:34 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:32:34 - rca_bot - ERROR - <module>:488 - Fatal error: asyncio.run() cannot be called from a running event loop
+Traceback (most recent call last):
+  File "/home/spark-cfac993f-9f22-44e7-8fe3-38/.ipykernel/8158/command-6663728338687264-307336720", line 482, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 186, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+2025-12-29 19:37:56 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:37:56 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:37:56 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:37:56 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:37:56 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:39:46 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:39:46 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:39:46 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:39:46 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:39:46 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:39:46 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 19:39:47 - rca_bot - INFO - __init__:85 - SDK Session initialized: cli_1767037186.733378
+2025-12-29 19:39:47 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 19:54:39 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:54:39 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:54:39 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:54:39 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:54:39 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:54:39 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 19:54:39 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 19:56:32 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:56:32 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:56:32 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:56:32 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:56:32 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:56:32 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 19:56:32 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 19:56:32 - rca_bot - INFO - __init__:98 - Session initialized: {self.session_id}
+2025-12-29 19:59:22 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:59:22 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:59:22 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:59:22 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:59:22 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:59:22 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 19:59:22 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 19:59:22 - rca_bot - INFO - __init__:79 - Session initialized: cli_1767038362.244916
+2025-12-29 19:59:31 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 19:59:31 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 19:59:31 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 19:59:31 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 19:59:31 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 19:59:31 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 20:01:37 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 20:01:37 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 20:01:37 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 20:01:37 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 20:01:37 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 20:01:37 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 20:01:38 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 20:01:38 - rca_bot - INFO - __init__:102 - CLI initialized (session_id=2219afab-63e0-4fe7-8b5d-dcb15a18b97d)
+2025-12-29 20:01:38 - rca_bot - INFO - run:140 - RCA Analyzer Bot CLI
+2025-12-29 20:01:38 - rca_bot - INFO - run:141 - Type 'quit' or 'exit' to stop
+
+2025-12-29 20:01:38 - rca_bot - INFO - run:145 - Available pipelines: Data Pipeline Analysis, Application Performance, Infrastructure Monitoring, Security Incident, Network Issues
+2025-12-29 20:01:45 - rca_bot - INFO - run:158 - User input received: hello
+2025-12-29 20:01:45 - rca_bot - ERROR - run:172 - CLI error: This event loop is already running
+2025-12-29 20:02:54 - rca_bot - INFO - run:168 - CLI session interrupted
+2025-12-29 20:03:25 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-29 20:03:25 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-29 20:03:25 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-29 20:03:25 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-29 20:03:25 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-29 20:03:25 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-29 20:03:26 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-29 20:03:26 - rca_bot - INFO - __init__:110 - CLI initialized (session_id=c1671ad5-b850-4e14-ac39-419396db3b69)
+2025-12-29 20:03:26 - rca_bot - INFO - run:148 - RCA Analyzer Bot CLI
+2025-12-29 20:03:26 - rca_bot - INFO - run:149 - Type 'quit' or 'exit' to stop
+
+2025-12-29 20:03:26 - rca_bot - INFO - run:153 - Available pipelines: Data Pipeline Analysis, Application Performance, Infrastructure Monitoring, Security Incident, Network Issues
+2025-12-29 20:03:30 - rca_bot - INFO - run:166 - User input received: hello
+2025-12-29 20:03:30 - rca_bot.utils.rate_limiter - DEBUG - check_rate_limit:66 - Rate limit check passed for c1671ad5-b850-4e14-ac39-419396db3b69: 1/20 requests
+2025-12-29 20:03:30 - rca_bot.agents - DEBUG - input_safety_guardrail:219 - Input guardrail checking: hello...
+2025-12-29 20:03:30 - rca_bot.agents - DEBUG - input_safety_guardrail:321 - Input guardrail passed all checks
+2025-12-29 20:03:32 - rca_bot.agents - DEBUG - output_safety_guardrail:332 - Output guardrail checking: Hello! How can I help you with your system or application issue today? If you’re experiencing a spec...
+2025-12-29 20:03:32 - rca_bot.agents - DEBUG - output_safety_guardrail:450 - Output guardrail passed all checks
+2025-12-29 20:03:39 - rca_bot - INFO - run:166 - User input received: write a python code
+2025-12-29 20:03:39 - rca_bot.utils.rate_limiter - DEBUG - check_rate_limit:66 - Rate limit check passed for c1671ad5-b850-4e14-ac39-419396db3b69: 2/20 requests
+2025-12-29 20:03:39 - rca_bot.agents - DEBUG - input_safety_guardrail:219 - Input guardrail checking: write a python code...
+2025-12-29 20:03:39 - rca_bot.agents - WARNING - input_safety_guardrail:261 - Code generation request detected
+2025-12-29 20:03:55 - rca_bot - INFO - run:166 - User input received: how can you help me
+2025-12-29 20:03:55 - rca_bot.utils.rate_limiter - DEBUG - check_rate_limit:66 - Rate limit check passed for c1671ad5-b850-4e14-ac39-419396db3b69: 3/20 requests
+2025-12-29 20:03:55 - rca_bot.agents - DEBUG - input_safety_guardrail:219 - Input guardrail checking: how can you help me...
+2025-12-29 20:03:55 - rca_bot.agents - DEBUG - input_safety_guardrail:321 - Input guardrail passed all checks
+2025-12-29 20:03:56 - rca_bot.agents - DEBUG - output_safety_guardrail:332 - Output guardrail checking: I’m sorry, but I can’t provide code. However, I can walk you through the steps you’d need to take, e...
+2025-12-29 20:03:56 - rca_bot.agents - DEBUG - output_safety_guardrail:450 - Output guardrail passed all checks
+2025-12-29 20:04:26 - rca_bot - INFO - run:176 - CLI session interrupted
+2025-12-30 08:16:52 - rca_bot - INFO - setup_logging:54 - ================================================================================
+2025-12-30 08:16:52 - rca_bot - INFO - setup_logging:55 - RCA Analyzer Bot - Logging initialized successfully
+2025-12-30 08:16:52 - rca_bot - INFO - setup_logging:56 - Log Level: DEBUG
+2025-12-30 08:16:52 - rca_bot - INFO - setup_logging:57 - Log File: logs/rca_bot.log
+2025-12-30 08:16:52 - rca_bot - INFO - setup_logging:58 - ================================================================================
+2025-12-30 08:16:52 - rca_bot.agents - INFO - create_rca_agent:555 - RCA Agent created: pipeline=None
+2025-12-30 08:16:53 - rca_bot.utils.rate_limiter - INFO - __init__:33 - RateLimiter initialized: 20 requests per 60s
+2025-12-30 08:16:53 - rca_bot - INFO - __init__:110 - CLI initialized (session_id=0cdeb80c-2567-4b5d-9b50-aa677c943f96)
+2025-12-30 08:16:53 - rca_bot - INFO - run:150 - RCA Analyzer Bot CLI
+2025-12-30 08:16:53 - rca_bot - INFO - run:151 - Type 'quit' or 'exit' to stop
+
+2025-12-30 08:16:53 - rca_bot - INFO - run:155 - Available pipelines: Data Pipeline Analysis, Application Performance, Infrastructure Monitoring, Security Incident, Network Issues
+2025-12-30 08:17:38 - rca_bot - INFO - run:168 - User input received: hello
+2025-12-30 08:17:38 - rca_bot.utils.rate_limiter - DEBUG - check_rate_limit:66 - Rate limit check passed for 0cdeb80c-2567-4b5d-9b50-aa677c943f96: 1/20 requests
+2025-12-30 08:17:38 - rca_bot.agents - DEBUG - input_safety_guardrail:219 - Input guardrail checking: hello...
+2025-12-30 08:17:38 - rca_bot.agents - DEBUG - input_safety_guardrail:321 - Input guardrail passed all checks
+2025-12-30 08:17:40 - rca_bot.agents - DEBUG - output_safety_guardrail:332 - Output guardrail checking: Hello! How can I help you with your system or application issue today? If you’re experiencing a spec...
+2025-12-30 08:17:40 - rca_bot.agents - DEBUG - output_safety_guardrail:450 - Output guardrail passed all checks
+2025-12-30 08:18:02 - rca_bot - INFO - run:168 - User input received: hi
+2025-12-30 08:18:02 - rca_bot.utils.rate_limiter - DEBUG - check_rate_limit:66 - Rate limit check passed for 0cdeb80c-2567-4b5d-9b50-aa677c943f96: 2/20 requests
+2025-12-30 08:18:02 - rca_bot.agents - DEBUG - input_safety_guardrail:219 - Input guardrail checking: hi...
+2025-12-30 08:18:02 - rca_bot.agents - DEBUG - input_safety_guardrail:321 - Input guardrail passed all checks
+2025-12-30 08:18:03 - rca_bot.agents - DEBUG - output_safety_guardrail:332 - Output guardrail checking: Hi there! How can I assist you with your system or application today? If you’re seeing a specific is...
+2025-12-30 08:18:03 - rca_bot.agents - DEBUG - output_safety_guardrail:450 - Output guardrail passed all checks
+2025-12-30 08:24:32 - rca_bot - INFO - run:178 - CLI session interrupted

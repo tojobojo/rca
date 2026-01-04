@@ -1,0 +1,17 @@
+# Core Dependencies
+pyspark>=3.4.0
+databricks-connect>=13.0.0
+
+# OpenAI for LLM
+openai>=1.12.0
+
+# Utilities
+python-dotenv>=1.0.0
+typing-extensions>=4.9.0
+
+# Production
+structlog>=23.0.0
+
+# Optional: For testing
+pytest>=7.4.0
+pytest-mock>=3.12.0
