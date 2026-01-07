@@ -35,21 +35,38 @@ class ReportGenerator:
 		try:
 			prompt = self._build_prompt(analysis_results)
             
-			response = self.client.chat.completions.create(
-				model=self.model,
-				messages=[
-					{
-						"role": "system",
-						"content": self._get_system_prompt()
-					},
-					{
-						"role": "user",
-						"content": prompt
-					}
-				],
-				temperature=self.temperature,
-				max_tokens=self.max_tokens
-			)
+			# Retry logic with exponential backoff
+			max_retries = 3
+			base_delay = 2
+			
+			for attempt in range(max_retries):
+				try:
+					response = self.client.chat.completions.create(
+						model=self.model,
+						messages=[
+							{
+								"role": "system",
+								"content": self._get_system_prompt()
+							},
+							{
+								"role": "user",
+								"content": prompt
+							}
+						],
+						temperature=self.temperature,
+						max_tokens=self.max_tokens
+					)
+					
+					break  # Success
+					
+				except Exception as e:
+					if attempt == max_retries - 1:
+						raise  # Re-raise on last attempt
+						
+					import time
+					delay = base_delay * (2 ** attempt)
+					logger.warning(f"LLM call failed (attempt {attempt+1}/{max_retries}): {e}. Retrying in {delay}s...")
+					time.sleep(delay)
             
 			content = response.choices[0].message.content
 
@@ -71,28 +88,22 @@ class ReportGenerator:
     
 	def _get_system_prompt(self) -> str:
 		"""Get system prompt for LLM"""
-		return """You are an expert data pipeline analyst specializing in root cause analysis.
+		return """You are an Executive Data Analyst.
 
-Your job is to take structured analysis results and generate clear, actionable RCA summaries for technical stakeholders.
+Your goal is to write a concise Executive Summary (< 150 words) for a pipeline incident report.
+The report already contains visual tables with all the raw metrics (drop rates, step breakdowns, etc.), so DO NOT repeat these numbers unless critical for context.
 
-Guidelines:
-- Start with a concise executive summary (2-3 sentences)
-- Explain the root cause clearly with supporting data
-- Reference specific metrics, steps, and rules
-- Provide actionable recommendations
-- Adjust tone based on severity:
-  * CRITICAL: Urgent, requires immediate action
-  * WARNING: Concerned, needs attention
-  * NORMAL: Informative, monitoring recommended
-- Keep it concise but thorough (aim for 300-500 words)
-- Use professional but accessible language
-- Format for email readability (use paragraphs, not bullet points)
+Focus STRICTLY on:
+1. WHAT happened (The Root Cause): Link code changes to drop rate spikes.
+2. WHY it matters (Business Context): Brief impact statement.
+3. WHAT to do (Recommendations): Specific, actionable steps.
 
-Do NOT:
-- Make up data not provided
-- Speculate beyond the evidence
-- Use overly technical jargon
-- Include code snippets"""
+Tone: Professional, direct, and action-oriented.
+Format:
+- Use short paragraphs.
+- Use 1-2 bullet points for recommendations if needed.
+- NO introductory fluff ("Here is the summary...").
+- NO redundant metric tables."""
     
 	def _build_prompt(self, analysis: Dict[str, Any]) -> str:
 		"""Build prompt for LLM"""
@@ -144,11 +155,8 @@ METRICS SUMMARY:
 			for step in analysis['step_analysis'][:5]:  # Top 5 steps
 				prompt += f"- {step['step_name']}: {step['drop_percentage']}% drop rate ({step['dropped_records']:,} records dropped)\n"
         
-		prompt += "\n\nGenerate a professional RCA summary with:\n"
-		prompt += "1. Executive Summary (what happened)\n"
-		prompt += "2. Root Cause Analysis (why it happened)\n"
-		prompt += "3. Detailed Findings (supporting evidence)\n"
-		prompt += "4. Recommendations (what to do next)\n"
+		prompt += "\n\nBased on the data above, generate the Executive Summary following the system instructions.\n"
+		prompt += "Remember: Do NOT simply list the metrics again. Interpret them.\n"
         
 		return prompt
     
