@@ -171,13 +171,13 @@ class MetricsCalculator:
             # Query recent code changes
             query = f"""
             SELECT 
-                new_rule_version_id as rule_version_id,
-                change_id,
+                old_rule_version_id as rule_version_id,
+                change_id as recent_change_id,
                 change_timestamp,
                 DATEDIFF(HOUR, change_timestamp, CURRENT_TIMESTAMP) as hours_since_change
             FROM {Config.db.RULE_CHANGES_TABLE}
             WHERE pipeline_name = '{pipeline_name}'
-              AND change_timestamp >= CURRENT_TIMESTAMP - INTERVAL {change_window_hours} HOURS
+              -- AND change_timestamp >= CURRENT_TIMESTAMP - INTERVAL {change_window_hours} HOURS
             """
             
             changes_df = SparkManager.execute_query(query)
@@ -199,7 +199,7 @@ class MetricsCalculator:
             # Mark first run after change
             enriched_df = enriched_df.withColumn(
                 "is_first_run_after_change",
-                F.col("change_id").isNotNull()
+                F.col("recent_change_id").isNotNull()
             ).withColumn(
                 "days_since_rule_changed",
                 F.when(
@@ -234,7 +234,7 @@ class MetricsCalculator:
                 
                 delta_table.alias("target").merge(
                     df.alias("source"),
-                    "target.run_id = source.run_id AND target.pipeline_name = source.pipeline_name AND target.step_name = source.step_name AND target.rule_name = source.rule_name"
+                    "target.run_id = source.run_id AND target.pipeline_name = source.pipeline_name AND target.step_name = source.step_name AND target.rule_name = source.rule_name AND target.recent_change_id = source.recent_change_id"
                 ).whenMatchedUpdateAll() \
                 .whenNotMatchedInsertAll() \
                 .execute()

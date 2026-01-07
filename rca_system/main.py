@@ -18,7 +18,8 @@ def install_packages():
         "pydantic>=2.12.5",         # Latest: v2.12.5 (Nov 26, 2025)
         "litellm>=1.80.11",         # Latest: v1.80.11 (Dec 22, 2025)
         "structlog>=25.5.0",         # Latest: v25.5.0 (Oct 27, 2025)
-        "sendgrid>=6.12.5"
+        "sendgrid>=6.12.5",
+        "python-dotenv>=1.0.0"
     ]
     
     print("Installing required packages...")
@@ -210,7 +211,7 @@ class PipelineRCAOrchestrator:
             'analysis_timestamp': datetime.now(),
             'severity': analysis_results['severity'],
             'summary_text': summary,
-            'analysis_json': json.dumps(analysis_results),
+            'analysis_json': json.dumps(analysis_results, default=str),
             'metrics_summary_json': json.dumps(analysis_results['metrics_summary'])
         }]
         
@@ -251,7 +252,7 @@ def main():
     
     logger.info("Pipeline RCA System initialized and ready")
 
-    run_id = "run_024"
+    run_id = "run_027"
     pipeline_name = "merchant_peer_grouping_pipeline"
 
     orchestrator = PipelineRCAOrchestrator()
